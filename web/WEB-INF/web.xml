@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.1" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd">
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>user.pck.myapp.userServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getCarsServlet</servlet-name>
+        <servlet-class>cars.pck.myapp.getCarsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getCarsServlet</servlet-name>
+        <url-pattern>/getCarsServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
