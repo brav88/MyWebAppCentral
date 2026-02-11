@@ -16,21 +16,28 @@ public class Database {
     public Database() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/PriceAutoSales", "root", "Admin$1234");
-        } catch (ClassNotFoundException ex) {
-            System.getLogger(Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (SQLException ex) {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/PriceAutoSalesCentral", "root", "Admin$1234");
+        } catch (ClassNotFoundException | SQLException ex) {
             System.getLogger(Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 
-    public ResultSet GetQuery(String sql) {
+    public ResultSet ExecuteQuery(String sql) {
         try {
             Statement cmd = conn.createStatement();
             return cmd.executeQuery(sql);
         } catch (SQLException ex) {
             System.getLogger(database.pck.myapp.Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             return null;
+        }       
+    }
+    
+    public void ExecuteUpdate(String sql) {
+        try {
+            Statement cmd = conn.createStatement();                       
+            cmd.executeUpdate(sql);
+        } catch (SQLException ex) {
+            System.getLogger(database.pck.myapp.Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);            
         }       
     }
 
