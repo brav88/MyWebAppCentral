@@ -1,5 +1,5 @@
-CREATE DATABASE PriceAutoSales;
-USE PriceAutoSales;
+CREATE DATABASE PriceAutoSalesCentral;
+USE PriceAutoSalesCentral;
 
 /*DROP TABLE Cars;*/
 
@@ -15,8 +15,7 @@ CREATE TABLE Cars (
 	PRIMARY KEY (carId)
 );
 
-INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)
-VALUES ('Toyota', 'Land Cruiser Prado', 7, 2, 2, '4000cc', LOCALTIME());
+INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created) VALUES ('Toyota', 'Land Cruiser Prado', 7, 2, 2, '4000cc', LOCALTIME());
 INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)
 VALUES ('Honda', 'Civic', 1, 1, 1, '1700cc', LOCALTIME());
 INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)

@@ -17,30 +17,15 @@ public class Database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost/PriceAutoSalesCentral", "root", "Admin$1234");
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.getLogger(Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {            
+            System.getLogger(Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);            
         }
     }
-
-    public ResultSet ExecuteQuery(String sql) {
-        try {
-            Statement cmd = conn.createStatement();
-            return cmd.executeQuery(sql);
-        } catch (SQLException ex) {
-            System.getLogger(database.pck.myapp.Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            return null;
-        }       
-    }
     
-    public void ExecuteUpdate(String sql) {
-        try {
-            Statement cmd = conn.createStatement();                       
-            cmd.executeUpdate(sql);
-        } catch (SQLException ex) {
-            System.getLogger(database.pck.myapp.Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);            
-        }       
+    public Connection getConnection(){
+        return conn;
     }
-
+       
     public void Close() {
         try {
             conn.close();
