@@ -15,14 +15,17 @@ CREATE TABLE Cars (
 	PRIMARY KEY (carId)
 );
 
-INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created) VALUES ('Toyota', 'Land Cruiser Prado', 7, 2, 2, '4000cc', LOCALTIME());
+INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created) 
+VALUES ('Toyota', 'Land Cruiser Prado', 7, 2, 2, '4000', LOCALTIME());
 INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)
-VALUES ('Honda', 'Civic', 1, 1, 1, '1700cc', LOCALTIME());
+VALUES ('Honda', 'Civic', 1, 1, 1, '1700', LOCALTIME());
 INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)
-VALUES ('Suzuki', 'Vitara', 1, 1, 1, '1900cc', LOCALTIME());
+VALUES ('Suzuki', 'Vitara', 1, 1, 1, '1900', LOCALTIME());
 
-UPDATE Cars SET brand = 'Suzuki' WHERE carId = 3;
-SELECT * FROM Cars;
+UPDATE Cars SET cubicCapacity = 1900 WHERE carId = 3;
+DELETE FROM Cars WHERE carId = 7;
+
+SELECT * FROM Cars WHERE carId = 4;
 
 CREATE TABLE Transmission (
     id int NOT NULL AUTO_INCREMENT,

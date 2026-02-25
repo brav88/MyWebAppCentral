@@ -9,7 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 import model.pck.myapp.Car;
 
 /**
@@ -23,36 +23,30 @@ public class CarsServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         CarsDAO dao = new CarsDAO();
-        
-        if (action == null) {            
-            List<Car> list = dao.getAllCars();
-            request.setAttribute("carList", list);
+
+        if (action == null) {
+            request.setAttribute("carList", dao.getAllCars());
             request.getRequestDispatcher("cars.jsp").forward(request, response);
-        }
-        if(action.equals("Edit")){
-            String carId = request.getParameter("carId");
-            Car car = dao.getCarById(Integer.parseInt(carId));
-            request.setAttribute("Car", car);
-            request.getRequestDispatcher("cars-form.jsp").forward(request, response);
-        } 
-        if(action.equals("Delete")){
-            String carId = request.getParameter("carId");
-            dao.deleteCar(Integer.parseInt(carId));           
+        } else if (action.equals("Edit")) {
+            request.setAttribute("Car", dao.getCarById(Integer.parseInt(request.getParameter("carId"))));
+            request.getRequestDispatcher("CatalogServlet?path=cars-form.jsp").forward(request, response);
+        } else if (action.equals("Delete")) {
+            dao.deleteCar(Integer.parseInt(request.getParameter("carId")));
             response.sendRedirect("CarsServlet");
-        } 
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("txtCarId");
-        String brand = request.getParameter("txtBrand");
-        String model = request.getParameter("txtModel");
-        String cc = request.getParameter("txtCC");
 
         Car car = new Car();
-        car.setBrand(brand);
-        car.setModel(model);
-        car.setCC(cc);
+        car.setBrand(request.getParameter("txtBrand"));
+        car.setModel(request.getParameter("txtModel"));
+        car.setCarType(Integer.parseInt(request.getParameter("selCarType")));
+        car.setFuelType(Integer.parseInt(request.getParameter("selFuelType")));
+        car.setTransmission(Integer.parseInt(request.getParameter("selTransmission")));
+        car.setCC(request.getParameter("txtCC"));
 
         CarsDAO dao = new CarsDAO();
         if (id.equals("")) {

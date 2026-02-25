@@ -30,6 +30,9 @@ public class CarsDAO {
                 car.setId(rs.getInt("carId"));
                 car.setBrand(rs.getString("brand"));
                 car.setModel(rs.getString("model"));
+                car.setCarType(rs.getInt("type"));
+                car.setFuelType(rs.getInt("fuelType"));
+                car.setTransmission(rs.getInt("transmission"));
                 car.setCC(rs.getString("cubicCapacity"));
                 list.add(car);
             }
@@ -57,6 +60,9 @@ public class CarsDAO {
                 car.setId(rs.getInt("carId"));
                 car.setBrand(rs.getString("brand"));
                 car.setModel(rs.getString("model"));
+                car.setCarType(rs.getInt("type"));
+                car.setFuelType(rs.getInt("fuelType"));
+                car.setTransmission(rs.getInt("transmission"));
                 car.setCC(rs.getString("cubicCapacity"));
                 return car;
             }
@@ -77,9 +83,9 @@ public class CarsDAO {
 
             pstat.setString(1, car.getBrand());
             pstat.setString(2, car.getModel());
-            pstat.setInt(3, 7);
-            pstat.setInt(4, 2);
-            pstat.setInt(5, 2);
+            pstat.setInt(3, car.getCarType());
+            pstat.setInt(4, car.getFuelType());
+            pstat.setInt(5, car.getTranmission());
             pstat.setString(6, car.getCC());
 
             pstat.executeUpdate();
@@ -88,19 +94,21 @@ public class CarsDAO {
             System.getLogger(database.pck.myapp.Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-    
+
     public void updateCar(Car car) {
         Database db = new Database();
         Connection conn = db.getConnection();
 
         try {
             PreparedStatement pstat
-            = conn.prepareStatement("UPDATE Cars SET brand = ?, model = ?, cubicCapacity = ? WHERE carId = ?;");
+                    = conn.prepareStatement("UPDATE Cars SET brand = ?, model = ?, type = ?, fuelType = ?, transmission = ? WHERE carId = ?;");
 
             pstat.setString(1, car.getBrand());
-            pstat.setString(2, car.getModel());           
-            pstat.setString(3, car.getCC());
-            pstat.setInt(4, car.getId());
+            pstat.setString(2, car.getModel());
+            pstat.setInt(3, car.getCarType());
+            pstat.setInt(4, car.getFuelType());
+            pstat.setInt(5, car.getTranmission());
+            pstat.setInt(6, car.getId());
 
             pstat.executeUpdate();
 
@@ -108,15 +116,15 @@ public class CarsDAO {
             System.getLogger(database.pck.myapp.Database.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-    
+
     public void deleteCar(int carId) {
         Database db = new Database();
         Connection conn = db.getConnection();
 
         try {
             PreparedStatement pstat
-            = conn.prepareStatement("DELETE FROM Cars WHERE carId = ?;");
-           
+                    = conn.prepareStatement("DELETE FROM Cars WHERE carId = ?;");
+
             pstat.setInt(1, carId);
 
             pstat.executeUpdate();

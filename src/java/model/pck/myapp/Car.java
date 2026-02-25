@@ -35,6 +35,18 @@ public class Car {
         return Model;
     }
 
+    public int getCarType() {
+        return Type;
+    }
+
+    public int getFuelType() {
+        return FuelType;
+    }
+
+    public int getTranmission() {
+        return Transmission;
+    }
+
     public String getCC() {
         return CubicCapacity;
     }
@@ -49,6 +61,18 @@ public class Car {
 
     public void setModel(String model) {
         this.Model = model;
+    }
+
+    public int setCarType(int type) {
+        return this.Type = type;
+    }
+
+    public int setFuelType(int fuelType) {
+        return this.FuelType = fuelType;
+    }
+
+    public int setTransmission(int transmission) {
+        return this.Transmission = transmission;
     }
 
     public void setCC(String cc) {

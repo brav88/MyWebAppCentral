@@ -27,10 +27,14 @@
         </style>
     </head>
     <body>
+        <%
+            String name = (String)session.getAttribute("Name");
+            List<Car> list = (List<Car>) request.getAttribute("carList");
+        %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="#">
-                    <span class="text-danger">AUTO</span>ELITE
+                    <span class="text-danger">AUTO</span>ELITE Bienvenido <%=name%>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,16 +71,12 @@
                         </li>
 
                         <li class="nav-item ms-lg-3">
-                            <a class="btn btn-outline-danger btn-sm" href="cars-form.jsp">Vende tu Auto</a>
+                            <a class="btn btn-outline-danger btn-sm" href="CatalogServlet?path=cars-form.jsp">Vende tu Auto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
-        <%
-            List<Car> list = (List<Car>) request.getAttribute("carList");
-        %>
 
         <div class="container text-center mb-5 mt-custom">
             <div class="row">

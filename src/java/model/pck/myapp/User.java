@@ -10,23 +10,33 @@ package model.pck.myapp;
  */
 public class User {
 
+    private int id;
     private String Name;
-    private Integer Age;
-    private String Career;
+    private String LastName;
+    private int Email;
+    private int Type;
 
-    public User(String _name, int _age, String _career) {
-        this.Name = _name;
-        this.Age = _age;
-        this.Career = _career;
+    public User() {
+
     }
 
-    public String Wave() {
-        return this.Name + " you are " + this.Age + " years old, you are "
-                + (this.Underage() ? "a minor" : "an adult")
-                + " and you are ready to start a mayor in " + this.Career;
+    public int getId() {
+        return id;
     }
 
-    public boolean Underage() {
-        return this.Age < 18;
-    }    
+    public String getName() {
+        return Name;
+    }
+
+    public int getType() {
+        return Type;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.Name = name;
+    }
 }

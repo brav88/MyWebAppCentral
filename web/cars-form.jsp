@@ -4,6 +4,8 @@
     Author     : Personal
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="model.pck.myapp.Catalog"%>
 <%@page import="model.pck.myapp.Car"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -66,6 +68,9 @@
                 <div class="col">                   
                     <%
                         Car car = (Car) request.getAttribute("Car");
+                        List<Catalog> carTypeList = (List<Catalog>) request.getAttribute("CarTypeList");
+                        List<Catalog> fuelTypeList = (List<Catalog>) request.getAttribute("FuelTypeList");
+                        List<Catalog> transmissionList = (List<Catalog>) request.getAttribute("TransmissionList");
                     %>
                     <h1><%= (car == null) ? "Create new car" : "Modify car"%></h1>    
 
@@ -81,6 +86,37 @@
                                     <input class="form-control" type="text" name="txtModel"  id="txtModel" value='<%= (car == null) ? "" : car.getModel()%>' placeholder="model">
                                     <label for="txtModel">Model</label>
                                 </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="selCarType" aria-label="Default select example">
+                                        <% for (Catalog cat : carTypeList) {%>  
+                                        <option value="<%=cat.getId()%>"                                                
+                                                <%= (car == null) ? "" : (cat.getId() == car.getCarType()) ? "selected" : ""%>                                                
+                                                ><%=cat.getDescription()%></option>                                       
+                                        <% }%>  
+                                    </select>                                   
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="selFuelType" aria-label="Default select example">
+                                        <% for (Catalog cat : fuelTypeList) {%>  
+                                        <option value="<%=cat.getId()%>" 
+                                                <%= (car == null) ? "" : (cat.getId() == car.getFuelType()) ? "selected" : ""%>
+                                                ><%=cat.getDescription()%></option>                                       
+                                        <% }%>  
+                                    </select>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="selTransmission" aria-label="Default select example">
+                                        <% for (Catalog cat : transmissionList) {%>  
+                                        <option value="<%=cat.getId()%>"
+                                                <%= (car == null) ? "" : (cat.getId() == car.getTranmission()) ? "selected" : ""%>
+                                                ><%=cat.getDescription()%></option>                                       
+                                        <% }%>  
+                                    </select>
+                                </div>
+
                                 <div class="form-floating mb-3">
                                     <input class="form-control"  type="number" name="txtCC" id="txtCC" value='<%= (car == null) ? "" : car.getCC()%>' placeholder="1000">
                                     <label for="txtCC">CC</label>

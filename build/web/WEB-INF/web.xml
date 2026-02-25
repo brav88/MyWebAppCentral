@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.1" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd">
-    <welcome-file-list>
-        <welcome-file>CarsServlet</welcome-file>
+     <welcome-file-list>
+        <welcome-file>LoginServlet</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>CatalogServlet</servlet-name>
+        <url-pattern>/CatalogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>   
     <servlet>
         <servlet-name>userServlet</servlet-name>
         <servlet-class>user.pck.myapp.userServlet</servlet-class>
@@ -10,6 +22,22 @@
     <servlet>
         <servlet-name>CarsServlet</servlet-name>
         <servlet-class>cars.pck.myapp.CarsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CarsTypeServet</servlet-name>
+        <servlet-class>cars.pck.myapp.CarsTypeServet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CatalogServlet</servlet-name>
+        <servlet-class>cars.pck.myapp.CatalogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>search.pack.myapp.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>auth.pck.myapp.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userServlet</servlet-name>
