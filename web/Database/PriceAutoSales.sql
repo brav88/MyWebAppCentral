@@ -11,6 +11,7 @@ CREATE TABLE Cars (
     fuelType int,
     transmission int,
     cubicCapacity varchar(50),
+    userId int,
     created datetime,
 	PRIMARY KEY (carId)
 );
@@ -21,8 +22,10 @@ INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, cre
 VALUES ('Honda', 'Civic', 1, 1, 1, '1700', LOCALTIME());
 INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)
 VALUES ('Suzuki', 'Vitara', 1, 1, 1, '1900', LOCALTIME());
+INSERT INTO Cars (brand, model, type, fuelType, transmission, cubicCapacity, created)
+VALUES ('Suzuki', 'Alto', 8, 1, 1, '1000', LOCALTIME());
 
-UPDATE Cars SET cubicCapacity = 1900 WHERE carId = 3;
+UPDATE Cars SET userId = 1 WHERE carId = 3;
 DELETE FROM Cars WHERE carId = 7;
 
 SELECT * FROM Cars WHERE carId = 4;
@@ -82,4 +85,32 @@ VALUES ('Station Wagon');
 
 SELECT * FROM CarType;
 
+CREATE TABLE Users (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(50),
+    last_name varchar(50),
+    email varchar(50),
+    password varchar(50),
+    type varchar(50),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO Users (name, last_name, email, password, type)
+VALUES ('Braulio', 'Sandi', 'bsandim@castrocarazo.ac.cr', 'Admin$1234', 'root');
+INSERT INTO Users (name, last_name, email, password, type)
+VALUES ('Ernesto', 'Valverde', 'evalverde@castrocarazo.ac.cr', 'Admin$1234', 'sales');
+
+SELECT * FROM Users WHERE email = 'bsandim@castrocarazo.ac.cr' AND password = 'Admin$1234';
+
+SELECT 
+	cars.brand, 
+	cars.model, 
+    cars.cubicCapacity,
+	cartype.description,
+    concat(users.name,' ', users.last_name) owner
+FROM cars	
+	INNER JOIN cartype 
+    ON cars.type = cartype.id
+    LEFT JOIN users 
+    ON cars.userid = users.id;
 

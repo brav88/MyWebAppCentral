@@ -4,6 +4,7 @@
     Author     : Personal
 --%>
 
+<%@page import="model.pck.myapp.User"%>
 <%@page import="java.util.List"%>
 <%@page import="model.pck.myapp.Car"%>
 <%@page import="database.pck.myapp.Database"%>
@@ -28,13 +29,13 @@
     </head>
     <body>
         <%
-            String name = (String)session.getAttribute("Name");
+            User user = (User) session.getAttribute("User");
             List<Car> list = (List<Car>) request.getAttribute("carList");
         %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="#">
-                    <span class="text-danger">AUTO</span>ELITE Bienvenido <%=name%>
+                    <span class="text-danger">AUTO</span>ELITE Bienvenido <%=user.getName()%>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,6 +63,18 @@
                                 <li><a class="dropdown-item" href="#">Eléctricos</a></li>
                             </ul>
                         </li>
+                        
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                For <%=user.getName()%>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                                <li><a class="dropdown-item" href="#">My Cars</a></li>                                
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="LoginServlet">Logout</a></li>
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="#">Financiamiento</a>
@@ -82,13 +95,17 @@
             <div class="row">
                 <% for (Car car : list) {%>    
                 <div class="col">                   
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem; margin-top:10px">
                         <img src="https://www.shutterstock.com/image-vector/flat-car-picture-placeholder-symbol-600nw-2366856295.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><%=car.getBrand()%> <%=car.getCC()%>cc</h5>
                             <p class="card-text"><%=car.getModel()%></p>
+                            <% if (user.getId() == car.getUserId()) {%>  
                             <a href="CarsServlet?action=Edit&carId=<%=car.getId()%>" class="btn btn-primary">Edit</a>
                             <a href="CarsServlet?action=Delete&carId=<%=car.getId()%>" class="btn btn-danger">Delete</a>
+                            <% } else { %>  
+                            <a href="" class="btn btn-info">See details</a>
+                            <% }  %>  
                         </div>
                     </div>
                 </div>   

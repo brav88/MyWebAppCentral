@@ -13,8 +13,8 @@ public class User {
     private int id;
     private String Name;
     private String LastName;
-    private int Email;
-    private int Type;
+    private String Email;
+    private String Type;
 
     public User() {
 
@@ -28,15 +28,35 @@ public class User {
         return Name;
     }
 
-    public int getType() {
+    public String getLastName() {
+        return LastName;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public String getType() {
         return Type;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int _id) {
+        this.id = _id;
     }
 
-    public void setName(String name) {
-        this.Name = name;
+    public void setName(String _name) {
+        this.Name = _name;
+    }
+
+    public void setLastName(String _lastname) {
+        this.LastName = _lastname;
+    }
+
+    public void setEmail(String _email) {
+        this.Email = _email;
+    }
+    
+     public void setType(String _type) {
+        this.Type = _type;
     }
 }

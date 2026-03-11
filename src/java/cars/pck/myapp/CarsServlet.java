@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.pck.myapp.Car;
+import model.pck.myapp.User;
 
 /**
  *
@@ -39,7 +40,10 @@ public class CarsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("txtCarId");
-
+        
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("User");
+        
         Car car = new Car();
         car.setBrand(request.getParameter("txtBrand"));
         car.setModel(request.getParameter("txtModel"));
@@ -47,6 +51,8 @@ public class CarsServlet extends HttpServlet {
         car.setFuelType(Integer.parseInt(request.getParameter("selFuelType")));
         car.setTransmission(Integer.parseInt(request.getParameter("selTransmission")));
         car.setCC(request.getParameter("txtCC"));
+        car.setUserId(user.getId());
+        
 
         CarsDAO dao = new CarsDAO();
         if (id.equals("")) {

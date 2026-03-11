@@ -49,6 +49,18 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sesion
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                                <li><a class="dropdown-item" href="#">My Cars</a></li>                                
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="LoginServlet">Logout</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#">Financiamiento</a>
                         </li>
@@ -63,68 +75,67 @@
                 </div>
             </div>
         </nav>
-        <div class="container text-center mb-5 mt-custom">
-            <div class="row">
-                <div class="col">                   
-                    <%
-                        Car car = (Car) request.getAttribute("Car");
-                        List<Catalog> carTypeList = (List<Catalog>) request.getAttribute("CarTypeList");
-                        List<Catalog> fuelTypeList = (List<Catalog>) request.getAttribute("FuelTypeList");
-                        List<Catalog> transmissionList = (List<Catalog>) request.getAttribute("TransmissionList");
-                    %>
-                    <h1><%= (car == null) ? "Create new car" : "Modify car"%></h1>    
+        <div class="d-flex justify-content-center align-items-center">
+            <%
+                Car car = (Car) request.getAttribute("Car");
+                List<Catalog> carTypeList = (List<Catalog>) request.getAttribute("CarTypeList");
+                List<Catalog> fuelTypeList = (List<Catalog>) request.getAttribute("FuelTypeList");
+                List<Catalog> transmissionList = (List<Catalog>) request.getAttribute("TransmissionList");
+            %>
 
-                    <div class="card" style="width: 18rem;">                      
-                        <div class="card-body">
-                            <form method="POST" action="CarsServlet">
-                                <input type="hidden" name="txtCarId" value='<%= (car == null) ? "" : car.getId()%>'/><br>                       
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" type="text" name="txtBrand"  id="txtBrand" value='<%= (car == null) ? "" : car.getBrand()%>' placeholder="name">
-                                    <label for="txtBrand">Brand</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" type="text" name="txtModel"  id="txtModel" value='<%= (car == null) ? "" : car.getModel()%>' placeholder="model">
-                                    <label for="txtModel">Model</label>
-                                </div>
 
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" name="selCarType" aria-label="Default select example">
-                                        <% for (Catalog cat : carTypeList) {%>  
-                                        <option value="<%=cat.getId()%>"                                                
-                                                <%= (car == null) ? "" : (cat.getId() == car.getCarType()) ? "selected" : ""%>                                                
-                                                ><%=cat.getDescription()%></option>                                       
-                                        <% }%>  
-                                    </select>                                   
-                                </div>
-
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" name="selFuelType" aria-label="Default select example">
-                                        <% for (Catalog cat : fuelTypeList) {%>  
-                                        <option value="<%=cat.getId()%>" 
-                                                <%= (car == null) ? "" : (cat.getId() == car.getFuelType()) ? "selected" : ""%>
-                                                ><%=cat.getDescription()%></option>                                       
-                                        <% }%>  
-                                    </select>
-                                </div>
-
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" name="selTransmission" aria-label="Default select example">
-                                        <% for (Catalog cat : transmissionList) {%>  
-                                        <option value="<%=cat.getId()%>"
-                                                <%= (car == null) ? "" : (cat.getId() == car.getTranmission()) ? "selected" : ""%>
-                                                ><%=cat.getDescription()%></option>                                       
-                                        <% }%>  
-                                    </select>
-                                </div>
-
-                                <div class="form-floating mb-3">
-                                    <input class="form-control"  type="number" name="txtCC" id="txtCC" value='<%= (car == null) ? "" : car.getCC()%>' placeholder="1000">
-                                    <label for="txtCC">CC</label>
-                                </div>
-                                <button class="btn btn-primary" type="submit"><%= (car == null) ? "Save" : "Modify"%></button>
-                            </form>
+            <div class="card" style="width: 18rem;margin-top:20px">                      
+                <div class="card-header">
+                    <h3><%= (car == null) ? "Create new car" : "Modify car"%></h3>    
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="CarsServlet">
+                        <input type="hidden" name="txtCarId" value='<%= (car == null) ? "" : car.getId()%>'/><br>                       
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" name="txtBrand"  id="txtBrand" value='<%= (car == null) ? "" : car.getBrand()%>' placeholder="name">
+                            <label for="txtBrand">Brand</label>
                         </div>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" name="txtModel"  id="txtModel" value='<%= (car == null) ? "" : car.getModel()%>' placeholder="model">
+                            <label for="txtModel">Model</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="selCarType" aria-label="Default select example">
+                                <% for (Catalog cat : carTypeList) {%>  
+                                <option value="<%=cat.getId()%>"                                                
+                                        <%= (car == null) ? "" : (cat.getId() == car.getCarType()) ? "selected" : ""%>                                                
+                                        ><%=cat.getDescription()%></option>                                       
+                                <% }%>  
+                            </select>                                   
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="selFuelType" aria-label="Default select example">
+                                <% for (Catalog cat : fuelTypeList) {%>  
+                                <option value="<%=cat.getId()%>" 
+                                        <%= (car == null) ? "" : (cat.getId() == car.getFuelType()) ? "selected" : ""%>
+                                        ><%=cat.getDescription()%></option>                                       
+                                <% }%>  
+                            </select>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="selTransmission" aria-label="Default select example">
+                                <% for (Catalog cat : transmissionList) {%>  
+                                <option value="<%=cat.getId()%>"
+                                        <%= (car == null) ? "" : (cat.getId() == car.getTranmission()) ? "selected" : ""%>
+                                        ><%=cat.getDescription()%></option>                                       
+                                <% }%>  
+                            </select>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control"  type="number" name="txtCC" id="txtCC" value='<%= (car == null) ? "" : car.getCC()%>' placeholder="1000">
+                            <label for="txtCC">CC</label>
+                        </div>
+                        <button class="btn btn-primary" type="submit"><%= (car == null) ? "Save" : "Modify"%></button>
+                    </form>
                 </div>
             </div>
         </div>   
